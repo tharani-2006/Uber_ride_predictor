@@ -3,16 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uber Project</title>
+    <title>Uber Demand Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Uber Rides Prediction</h1>
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="logo">
+                <span class="logo-icon">🚗</span>
+                <h1>Uber Demand Predictor</h1>
+            </div>
+            <p class="hero-subtitle">Predict weekly ride demand based on market conditions</p>
+        </div>
     </div>
 
-    <form action="/predict" method="post">
-        
-    </form>
-    
+    <div class="main-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Market Parameters</h2>
+                <p>Enter details to predict weekly ride demand</p>
+            </div>
+
+            <form action="/predict" method="post" class="prediction-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="Priceperweek">
+                            <span class="label-icon">💰</span>
+                            Price per Week ($)
+                        </label>
+                        <input 
+                            type="number" 
+                            step="0.01" 
+                            name="Priceperweek" 
+                            id="Priceperweek" 
+                            placeholder="15-102"
+                            min="0"
+                            required
+                        >
+                        <small class="field-hint">Range: $15 - $102</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Population">
+                            <span class="label-icon">👥</span>
+                            Population
+                        </label>
+                        <input 
+                            type="number" 
+                            name="Population" 
+                            id="Population" 
+                            placeholder="1.59M - 1.8M"
+                            min="0"
+                            required
+                        >
+                        <small class="field-hint">Range: 1.59M - 1.8M</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Monthlyincome">
+                            <span class="label-icon">💵</span>
+                            Monthly Income ($)
+                        </label>
+                        <input 
+                            type="number" 
+                            step="0.01" 
+                            name="Monthlyincome" 
+                            id="Monthlyincome" 
+                            placeholder="5,800 - 16,200"
+                            min="0"
+                            required
+                        >
+                        <small class="field-hint">Range: $5,800 - $16,200</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Averageparkingpermonth">
+                            <span class="label-icon">🅿️</span>
+                            Avg. Parking ($)
+                        </label>
+                        <input 
+                            type="number" 
+                            step="0.01" 
+                            name="Averageparkingpermonth" 
+                            id="Averageparkingpermonth" 
+                            placeholder="50 - 200"
+                            min="0"
+                            required
+                        >
+                        <small class="field-hint">Range: $50 - $200</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="predict-btn">
+                    <span class="btn-icon">🔮</span>
+                    Predict Demand
+                </button>
+            </form>
+
+            {% if prediction_text %}
+            <div class="prediction-result">
+                <div class="result-header">
+                    <span class="result-icon">📊</span>
+                    <h3>Prediction</h3>
+                </div>
+                <div class="result-value">
+                    {{ prediction_text }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="floating-info">
+            <div class="info-badge">
+                <span class="info-icon">💡</span>
+                <span>ML-powered prediction</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
