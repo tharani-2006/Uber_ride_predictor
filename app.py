@@ -22,5 +22,5 @@ def predict():
 
     return render_template('index.html',prediction_text='Number of weekly riders is {}'.format(math.floor(output)))
 
-if __name__=='__main__':
+if __name__=='__main__':s
     app.run(debug=True)
